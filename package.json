@@ -21,7 +21,7 @@
     "url": "https://github.com/lonelam/stable-diffusion-desktop/issues"
   },
   "homepage": "https://github.com/lonelam/stable-diffusion-desktop#readme",
-  "devDependencies": {
-    "electron": "^latest"
+  "dependencies": {
+    "electron": "^25.0.1"
   }
 }
