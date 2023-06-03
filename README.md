@@ -1,8 +1,8 @@
 # Stable Diffusion Desktop (Stable Diffusion桌面版)
 
-Stable Diffusion Desktop is an Electron desktop app that wraps all the dependencies and configurations needed by the Stable Diffusion WebUI. This allows you to quickly install and start using Stable Diffusion like a desktop App without having to understand the details and complex parameters. (Stable Diffusion桌面版是一个Electron桌面应用，它封装了Stable Diffusion WebUI所需要的所有依赖和配置过程。这让你可以像使用桌面端App那样快速安装并上手Stable Diffusion，而无需学习细节和复杂的参数作用)
+Stable Diffusion Desktop is an Electron desktop app that wraps all the dependencies and configurations needed by the Stable Diffusion WebUI. This allows you to quickly install and start using Stable Diffusion like a desktop App without having to understand the details and complex parameters. (Stable Diffusion桌面版是一个Electron桌面应用，它封装了Stable Diffusion WebUI所需要的所有依赖和配置过程。这让你可以像使用桌面端App那样快速安装并上手Stable Diffusion，而无需学习技术细节和复杂的参数)
 
-For more detailed Chinese instructions, please refer to [readme_zh.md](readme_zh.md) (如果你需要更详细的中文说明，请参考[readme_zh.md](readme_zh.md))
+For more detailed Chinese instructions, please refer to [README_zh.md](README_zh.md) (如果你需要更详细的中文说明，请参考[README_zh.md](README_zh.md))
 
 ## Roadmap (路线图)
 
@@ -19,12 +19,15 @@ For more detailed Chinese instructions, please refer to [readme_zh.md](readme_zh
 
 ### Prerequisites (前提条件)
 
+- A graphic processor that has at least 
+TODO:
 Explain what things you need to install the software and how to install them.
 
 描述你需要安装什么软件以及如何安装它们。
 
 ### Installing (安装)
 
+TODO:
 A step by step series of examples that tell you how to get a development env running
 
 一步一步地告诉你如何运行开发环境的示例

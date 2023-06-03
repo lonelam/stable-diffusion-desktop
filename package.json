@@ -1,0 +1,27 @@
+{
+  "name": "stable-diffusion-desktop",
+  "version": "1.0.0",
+  "description": "An Electron desktop app that wraps all the dependencies and configurations needed by the Stable Diffusion WebUI",
+  "main": "",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lonelam/stable-diffusion-desktop.git"
+  },
+  "keywords": [
+    "electron",
+    "stable diffusion",
+    "desktop"
+  ],
+  "author": "Lai Zenan<laizenan@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lonelam/stable-diffusion-desktop/issues"
+  },
+  "homepage": "https://github.com/lonelam/stable-diffusion-desktop#readme",
+  "devDependencies": {
+    "electron": "^latest"
+  }
+}
