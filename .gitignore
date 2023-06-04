@@ -1,1 +1,17 @@
+# node modules
 node_modules/
+
+# build output
+output/
+dist/
+
+# app dependency
+appPython/
+appGit/
+# temporary files
+temp/
+
+# yarn
+yarn-error.log
+
+testApp/
