@@ -1,9 +1,15 @@
 import { app } from 'electron';
 import path from 'path';
+export const getAppProgramPath = () => {
+    if (process.execPath.includes('node_modules')) {
+        return app.getAppPath();
+    }
+    return path.dirname(process.execPath);
+};
 export const getPythonAccelerate = () => {
     if (process.platform === 'win32') {
         return path.join(
-            app.getAppPath(),
+            getAppProgramPath(),
             'appPython',
             'Scripts',
             'accelerate.exe'
@@ -13,9 +19,9 @@ export const getPythonAccelerate = () => {
 };
 export const getPythonPath = () => {
     if (process.platform === 'win32') {
-        return path.join(app.getAppPath(), 'appPython', 'python.exe');
+        return path.join(getAppProgramPath(), 'appPython', 'python.exe');
     }
-    return path.join(app.getAppPath(), 'appPython', 'python');
+    return path.join(getAppProgramPath(), 'appPython', 'python');
 };
 export const getPythonPathEnvironmentVariable = () => {
     const pythonRootPath = getPythonPath();

@@ -2,6 +2,7 @@ import { IPC_FUNC } from '@/rpc/funcNames';
 import { IWebUIOptions } from './rpc';
 import { IpcRendererEvent } from 'electron';
 import { i18nInit } from './i18n';
+import { t } from 'i18next';
 
 const { contextBridge, ipcRenderer } = require('electron');
 export const electronAPI = {
@@ -21,3 +22,4 @@ export const electronAPI = {
 } as const;
 i18nInit();
 contextBridge.exposeInMainWorld('electronAPI', electronAPI);
+contextBridge.exposeInMainWorld('t', t);

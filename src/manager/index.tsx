@@ -2,8 +2,10 @@ import { sendWebUILogs } from '@/rpc';
 import { getPythonPath } from '@/utils/environmentPaths';
 import { getGitPath } from '@/utils/git';
 import chalk from 'chalk';
-import { spawn, ChildProcessWithoutNullStreams, exec } from 'child_process';
+import { spawn } from 'child_process';
+import { type IPty } from 'node-pty';
 import path from 'path';
+const nodePty = require('node-pty');
 const backEnds: BackendManager[] = [];
 export function closeAllBackends() {
     return Promise.all(
@@ -14,7 +16,7 @@ export function closeAllBackends() {
 }
 export class BackendManager {
     private webuiScriptPath: string;
-    childProcess: ChildProcessWithoutNullStreams | null = null;
+    childProcess: IPty | null = null;
 
     constructor(private repoPath: string) {
         if (process.platform === 'win32') {
@@ -47,23 +49,25 @@ export class BackendManager {
         });
     }
     startV1() {
-        this.childProcess = spawn(getPythonPath(), [this.webuiScriptPath], {
-            cwd: this.repoPath,
-            env: {
-                ...process.env,
-                PYTHON: path.join(getPythonPath()),
-                GIT: getGitPath(),
-                COMMANDLINE_ARGS:
-                    '--medvram --precision full --no-half --opt-sub-quad-attention --disable-nan-check --enable-console-prompts',
-            },
-        });
+        this.childProcess = nodePty.spawn(
+            getPythonPath(),
+            [this.webuiScriptPath],
+            {
+                cols: 80,
+                rows: 30,
+                cwd: this.repoPath,
+                env: {
+                    ...process.env,
+                    PYTHON: path.join(getPythonPath()),
+                    GIT: getGitPath(),
+                    COMMANDLINE_ARGS:
+                        '--medvram --precision full --no-half --opt-sub-quad-attention --disable-nan-check --enable-console-prompts',
+                },
+            }
+        );
 
-        this.childProcess.stdout.on('data', (data) => {
+        this.childProcess!.onData((data) => {
             console.log(chalk.green(`[WebUI] ${data}`));
-            sendWebUILogs(String(data));
-        });
-        this.childProcess.stderr.on('data', (data) => {
-            console.log(chalk.red(`[WebUI] ${data}`));
             sendWebUILogs(String(data));
         });
     }

@@ -4,6 +4,14 @@ import { listenAll } from './rpc';
 import { i18nInit } from './i18n';
 import { t } from 'i18next';
 import { closeAllBackends } from './manager';
+import { getAppProgramPath } from './utils/environmentPaths';
+import { isDevelopment } from './utils';
+const isPrimary = app.requestSingleInstanceLock();
+if (!isPrimary) {
+    console.log('another instance of application started');
+    process.exit(-1);
+}
+
 i18nInit();
 let launchViewWindow: BrowserWindow | null;
 const createWindow = () => {
@@ -18,23 +26,26 @@ const createWindow = () => {
                 preload: path.join(__dirname, 'preload.js'),
                 nodeIntegration: true,
             },
-            titleBarOverlay: true,
-            titleBarStyle: 'hidden',
+            autoHideMenuBar: true,
         });
-        win.on('close', (evt) => {
-            evt.preventDefault();
+        win.on('close', () => {
+            closeAllBackends();
+        });
+        win.on('minimize', () => {
             win.hide();
         });
-        win.webContents.openDevTools();
+        if (isDevelopment()) {
+            win.webContents.openDevTools();
+        }
 
-        win.loadFile('assets/index.html');
+        win.loadFile(path.join(__dirname, './index.html'));
         launchViewWindow = win;
     }
 };
 
 app.whenReady().then(() => {
     createWindow();
-    const tray = new Tray('assets/icon.ico');
+    const tray = new Tray(path.join(getAppProgramPath(), 'assets', 'icon.ico'));
     const contextMenu = Menu.buildFromTemplate([
         {
             label: t('launch_view'),

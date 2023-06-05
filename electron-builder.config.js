@@ -7,6 +7,7 @@ const electronBuilderConfig = {
     },
     productName: 'Stable Diffusion Desktop',
     icon: 'assets/icon.ico',
-    extraFiles: ['appPython/**/*', 'appGit/**/*', 'locale/**/*'],
+    files: ['output/**/*', 'locale/**/*'],
+    extraFiles: ['appPython/**/*', 'appGit/**/*', 'assets/**/*'],
 };
 module.exports = electronBuilderConfig;

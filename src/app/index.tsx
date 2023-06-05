@@ -1,14 +1,25 @@
 import * as React from 'react';
+import { Terminal } from 'xterm';
+import 'xterm/css/xterm.css';
 
 export interface IAppProps {}
 
 export function App(props: IAppProps) {
     const {} = props;
-    const [logs, setLogs] = React.useState('');
+    const itermRef = React.useRef<HTMLDivElement>(null);
+
     React.useEffect(() => {
+        if (!itermRef.current) {
+            return;
+        }
+        const term = new Terminal();
+        term.open(itermRef.current);
         window.electronAPI.onWebUILogs((_, l) => {
-            setLogs((v) => `${v}\n${l}`);
+            term.write(l);
         });
+        return () => {
+            term.dispose();
+        };
     }, []);
     const cb = async () => {
         await window.electronAPI.updateWebUI(
@@ -20,8 +31,11 @@ export function App(props: IAppProps) {
     };
     return (
         <div>
-            <button onClick={cb}>click me</button>
-            <div>{logs}</div>
+            <button onClick={cb}>{t('click_to_start')}</button>
+            <a href="http://127.0.0.1:7860" target="_blank">
+                {t('open_stable_diffusion')}
+            </a>
+            <div ref={itermRef}></div>
         </div>
     );
 }

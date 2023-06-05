@@ -2,5 +2,7 @@
     "launch_view": "Launch View",
     "configuration_view": "Configuration View",
     "exit": "Exit",
-    "stable_diffusion_launcher": "Stable Diffusion Launcher"
+    "stable_diffusion_launcher": "Stable Diffusion Launcher",
+    "click_to_start": "Click To Start",
+    "open_stable_diffusion": "Open Stable Diffusion"
 }

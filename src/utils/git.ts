@@ -1,15 +1,14 @@
 import chalk from 'chalk';
-import { spawn } from 'child_process';
 import { app } from 'electron';
-import { rm } from 'fs';
 import { mkdir, existsSync } from 'fs';
 import * as path from 'path';
 import { rimraf } from 'rimraf';
 import simpleGit from 'simple-git';
 import { promisify } from 'util';
+import { getAppProgramPath } from './environmentPaths';
 export const getGitPath = () => {
     if (process.platform === 'win32') {
-        return path.join(app.getAppPath(), 'appGit', 'bin', 'git.exe');
+        return path.join(getAppProgramPath(), 'appGit', 'bin', 'git.exe');
     }
     return 'git';
 };
